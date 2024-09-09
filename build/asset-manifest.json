@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "https://paraparisnevers.fr/wp-content/uploads/asup/static/css/main.7d3cffea.css",
+    "main.js": "https://paraparisnevers.fr/wp-content/uploads/asup/static/js/main.aa0f375b.js",
+    "index.html": "https://paraparisnevers.fr/wp-content/uploads/asup/index.html",
+    "main.7d3cffea.css.map": "https://paraparisnevers.fr/wp-content/uploads/asup/static/css/main.7d3cffea.css.map",
+    "main.aa0f375b.js.map": "https://paraparisnevers.fr/wp-content/uploads/asup/static/js/main.aa0f375b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d3cffea.css",
+    "static/js/main.aa0f375b.js"
+  ]
+}
