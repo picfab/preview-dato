@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -12,8 +14,8 @@ import { render } from "./utils/render";
 import { findProductionUri, SiteLocale } from "./utils/findProductionUrl";
 
 const container = document.getElementById("root");
-const siteUrl = process.env.REACT_APP_SITE_URL;
-const previewSiteUrl = process.env.REACT_APP_PREVIEW_SITE_URL;
+const siteUrl = 'https://www.payfit.com';
+const previewSiteUrl =  'https://www.payfit.com';
 
 connect({
   renderConfigScreen(ctx) {
