@@ -14,8 +14,7 @@ import { render } from './utils/render';
 import { findProductionUri, SiteLocale } from './utils/findProductionUrl';
 
 const container = document.getElementById('root');
-const siteUrl = 'http://localhost:4322';
-const previewSiteUrl = 'https://payfit.com';
+const siteUrl = 'https://payfit.com';
 
 connect({
   renderConfigScreen(ctx) {
@@ -45,7 +44,6 @@ connect({
         <React.StrictMode>
           <div>
             <div className='container'>
-              <pre>{JSON.stringify(ctx.item, null, 2)}</pre>
               <div
                 style={{
                   display: 'flex',
@@ -91,7 +89,7 @@ connect({
                   Production View
                 </a>
                 <a
-                  href={`${previewSiteUrl}/preview/?datoSlug=${slug}&id=${ctx?.item?.id}&locale=${ctx.locale}&type=${ctx.itemType?.attributes?.api_key}`}
+                  href={`${siteUrl}/preview/?datoSlug=${slug}&id=${ctx?.item?.id}&locale=${ctx.locale}&type=${ctx.itemType?.attributes?.api_key}`}
                   target='_blank'
                   rel='noreferrer'
                   style={{
