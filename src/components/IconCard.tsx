@@ -1,4 +1,3 @@
-
 import type { PictoName } from './Icons/Picto/pictosLibraryGenerated';
 
 interface IconCardProps {
@@ -19,20 +18,22 @@ export default function IconCard({ iconName }: IconCardProps) {
       }}
     >
       <svg
-        width="32"
-        height="32"
-        style={{ marginBottom: '8px' }}
+        width='64'
+        height='64'
+        style={{ marginBottom: '8px', fill: '#2196f3' }}
       >
         <use href={`/icons/pictos.svg#${iconName}`} />
       </svg>
-      <span style={{ 
-        fontSize: '10px', 
-        textAlign: 'center', 
-        color: '#6B7280',
-        wordBreak: 'break-word'
-      }}>
+      <span
+        style={{
+          fontSize: '10px',
+          textAlign: 'center',
+          color: '#6B7280',
+          wordBreak: 'break-word',
+        }}
+      >
         {iconName}
       </span>
     </div>
   );
-} 
+}

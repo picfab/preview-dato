@@ -6,7 +6,7 @@ import IllustrationCard from './IllustrationCard';
 
 const gridStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
   gap: '12px',
 };
 
