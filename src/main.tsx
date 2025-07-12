@@ -1,26 +1,25 @@
-// @ts-nocheck
-
-import React from 'react';
-import { createRoot } from 'react-dom/client';
 import {
   connect,
-  IntentCtx,
-  RenderItemFormSidebarPanelCtx,
-  ItemType,
+  type RenderItemFormSidebarPanelCtx,
+  type ItemFormSidebarPanelsCtx,
+  type ItemType,
 } from 'datocms-plugin-sdk';
 import 'datocms-react-ui/styles.css';
-import ConfigScreen from './entrypoints/ConfigScreen';
-import { render } from './utils/render';
-import { findProductionUri, SiteLocale } from './utils/findProductionUrl';
+import ConfigScreen from './app/entrypoints/ConfigScreen';
+import { render } from './app/utils/render';
+import SidebarPanel from './components/SidebarPanel';
+import IconsModal from './components/IconsModal';
 
-const container = document.getElementById('root');
-const siteUrl = 'https://payfit.com';
+const siteUrl =
+  import.meta.env.MODE !== 'development'
+    ? import.meta.env.VITE_SITE_URL || 'http://localhost:4321'
+    : import.meta.env.VITE_PREVIEW_SITE_URL || 'http://localhost:4321';
 
 connect({
   renderConfigScreen(ctx) {
     return render(<ConfigScreen ctx={ctx} />);
   },
-  itemFormSidebarPanels(model: ItemType, ctx: IntentCtx) {
+  itemFormSidebarPanels(_model: ItemType, _ctx: ItemFormSidebarPanelsCtx) {
     return [
       {
         id: 'goToWebsite',
@@ -29,103 +28,38 @@ connect({
       },
     ];
   },
+  renderModal(modalId, ctx) {
+    if (modalId === 'preview-modal') {
+      const params = ctx.parameters as {
+        itemId: string;
+        locale: string;
+        modelName: string;
+        slug: string;
+        prodUri: string;
+        siteUrl: string;
+      };
+
+      return render(
+        <IconsModal
+          itemId={params.itemId}
+          locale={params.locale}
+          modelName={params.modelName}
+          slug={params.slug}
+          prodUri={params.prodUri}
+          siteUrl={params.siteUrl}
+        />
+      );
+    }
+
+    return null;
+  },
   renderItemFormSidebarPanel(
-    sidebarPanelId,
+    _sidebarPanelId,
     ctx: RenderItemFormSidebarPanelCtx
   ) {
     ctx.startAutoResizer();
-    const locale = ctx.locale as SiteLocale;
-    const postTypeApyKey = ctx.itemType.attributes.api_key;
-    const slug = (ctx.item?.attributes?.slug as any)?.[locale] as string;
-    const prodUri = findProductionUri(locale, postTypeApyKey, slug);
-    if (container && prodUri) {
-      const root = createRoot(container);
-      root.render(
-        <React.StrictMode>
-          <div>
-            <div className='container'>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '100%',
-                  minHeight: '200px',
-                  backgroundImage: 'linear-gradient(180deg, #ebf4ff, #fff)',
-                  gap: '16px',
-                }}
-              >
-                <a
-                  href={`${siteUrl}/${prodUri}`}
-                  target='_blank'
-                  rel='noreferrer'
-                  style={{
-                    display: 'block',
-                    paddingBottom: '12px',
-                    paddingTop: '12px',
-                    paddingLeft: '16px',
-                    paddingRight: '16px',
-                    backgroundColor: 'white',
-                    color: '#132D4A',
-                    minHeight: '48px',
-                    fontWeight: 500,
-                    fontSize: '16px',
-                    fontFamily: 'sans-serif',
-                    borderRadius: '12px',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease-in-out',
-                    boxSizing: 'border-box',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.boxShadow =
-                      '0px 4px 12px rgba(0, 0, 0, 0.2)';
-                    (e.target as HTMLElement).style.backgroundColor = '#f6f6f7';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.boxShadow = 'none';
-                    (e.target as HTMLElement).style.backgroundColor = 'white';
-                  }}
-                >
-                  Production View
-                </a>
-                <a
-                  href={`${siteUrl}/preview/?datoSlug=${slug}&id=${ctx?.item?.id}&locale=${ctx.locale}&type=${ctx.itemType?.attributes?.api_key}`}
-                  target='_blank'
-                  rel='noreferrer'
-                  style={{
-                    display: 'block',
-                    paddingBottom: '12px',
-                    paddingTop: '12px',
-                    paddingLeft: '16px',
-                    paddingRight: '16px',
-                    backgroundColor: '#0F6FDE',
-                    color: 'white',
-                    minHeight: '48px',
-                    fontWeight: 500,
-                    fontSize: '16px',
-                    fontFamily: 'sans-serif',
-                    borderRadius: '12px',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease-in-out',
-                    boxSizing: 'border-box',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.boxShadow =
-                      '0px 4px 12px rgba(0, 0, 0, 0.2)';
-                    (e.target as HTMLElement).style.backgroundColor = '#0964cd';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.boxShadow = 'none';
-                    (e.target as HTMLElement).style.backgroundColor = '#0F6FDE';
-                  }}
-                >
-                  Preview
-                </a>
-              </div>
-            </div>
-          </div>
-        </React.StrictMode>
-      );
-    }
+    console.log('ctx', ctx);
+
+    return render(<SidebarPanel ctx={ctx} siteUrl={siteUrl} />);
   },
 });
