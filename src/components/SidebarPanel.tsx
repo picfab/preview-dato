@@ -51,7 +51,7 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
 
   return (
     <div>
-      <div className='container'>
+      <div className="container">
         <div
           style={{
             display: 'flex',
@@ -66,8 +66,8 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
         >
           <a
             href={`${siteUrl}/${prodUri}`}
-            target='_blank'
-            rel='noreferrer'
+            target="_blank"
+            rel="noreferrer"
             style={{
               ...buttonBaseStyle,
               backgroundColor: 'white',
@@ -87,8 +87,8 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
           </a>
           <a
             href={`${siteUrl}/preview/?slug=${slug}&id=${ctx?.item?.id}&locale=${ctx.locale}&type=${ctx.itemType?.attributes?.api_key}`}
-            target='_blank'
-            rel='noreferrer'
+            target="_blank"
+            rel="noreferrer"
             style={{
               ...buttonBaseStyle,
               backgroundColor: '#0F6FDE',

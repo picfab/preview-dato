@@ -1,11 +1,12 @@
-
 import type { IllustrationName } from './Icons/Illustration/illustrationLibraryGenerated';
 
 interface IllustrationCardProps {
   illustrationName: IllustrationName;
 }
 
-export default function IllustrationCard({ illustrationName }: IllustrationCardProps) {
+export default function IllustrationCard({
+  illustrationName,
+}: IllustrationCardProps) {
   return (
     <div
       style={{
@@ -25,14 +26,16 @@ export default function IllustrationCard({ illustrationName }: IllustrationCardP
         height="32"
         style={{ marginBottom: '8px' }}
       />
-      <span style={{ 
-        fontSize: '10px', 
-        textAlign: 'center', 
-        color: '#6B7280',
-        wordBreak: 'break-word'
-      }}>
+      <span
+        style={{
+          fontSize: '10px',
+          textAlign: 'center',
+          color: '#6B7280',
+          wordBreak: 'break-word',
+        }}
+      >
         {illustrationName}
       </span>
     </div>
   );
-} 
+}

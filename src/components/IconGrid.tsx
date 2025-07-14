@@ -1,4 +1,3 @@
-
 import { pictosLibrary } from './Icons/Picto/pictosLibraryGenerated';
 import { illustrationsLibrary } from './Icons/Illustration/illustrationLibraryGenerated';
 import IconCard from './IconCard';
@@ -27,15 +26,18 @@ export default function IconGrid() {
           <IconCard key={iconName} iconName={iconName} />
         ))}
       </div>
-      
+
       <h3 style={{ ...sectionTitleStyle, marginBottom: '16px' }}>
         Illustrations ({illustrationsLibrary.length})
       </h3>
       <div style={{ ...gridStyle, marginBottom: '24px' }}>
         {illustrationsLibrary.map((illustrationName) => (
-          <IllustrationCard key={illustrationName} illustrationName={illustrationName} />
+          <IllustrationCard
+            key={illustrationName}
+            illustrationName={illustrationName}
+          />
         ))}
       </div>
     </>
   );
-} 
+}

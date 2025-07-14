@@ -1,4 +1,3 @@
-
 import { pictosLibrary } from './Icons/Picto/pictosLibraryGenerated';
 import { illustrationsLibrary } from './Icons/Illustration/illustrationLibraryGenerated';
 import IconGrid from './IconGrid';
@@ -45,8 +44,8 @@ export default function IconsModal({
       >
         <a
           href={`${siteUrl}/${prodUri}`}
-          target='_blank'
-          rel='noreferrer'
+          target="_blank"
+          rel="noreferrer"
           style={{
             display: 'inline-block',
             padding: '12px 16px',
@@ -61,8 +60,8 @@ export default function IconsModal({
         </a>
         <a
           href={`${siteUrl}/preview/?slug=${slug}&id=${itemId}&locale=${locale}`}
-          target='_blank'
-          rel='noreferrer'
+          target="_blank"
+          rel="noreferrer"
           style={{
             display: 'inline-block',
             padding: '12px 16px',
