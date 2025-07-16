@@ -12,16 +12,40 @@ import ConfigScreen from './app/entrypoints/ConfigScreen';
 import { render } from './app/utils/render';
 import SidebarPanel from './components/SidebarPanel';
 import IconsModal from './components/IconsModal';
-import { illustrationsLibrary } from './components/Icons/Illustration/illustrationLibraryGenerated';
-import { pictosLibrary } from './components/Icons/Picto/pictosLibraryGenerated';
-import Illustration from './components/Illustration';
-import Picto from './components/Picto';
+import Icon from './components/Icon';
+import { getValueByPath } from './app/utils/getValueByPath';
+import IconSelectField from './components/IconSelectField';
 // import IconComboBox from './components/IconComboBox';
 
 const siteUrl =
   import.meta.env.MODE !== 'development'
     ? import.meta.env.VITE_SITE_URL || 'http://localhost:4321'
     : import.meta.env.VITE_PREVIEW_SITE_URL || 'http://localhost:4321';
+
+const getOptionLabel = (
+  option: string
+): {
+  labelOriginal: string;
+  value: string;
+  label: React.ReactNode;
+} => {
+  return {
+    value: option,
+    labelOriginal: option,
+    label: (
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+        }}
+      >
+        <Icon name={option as any} style={{ width: 16, height: 16 }} />
+        <span>{option}</span>
+      </span>
+    ),
+  };
+};
 
 connect({
   renderConfigScreen(ctx) {
@@ -66,92 +90,66 @@ connect({
     ctx: RenderItemFormSidebarPanelCtx
   ) {
     ctx.startAutoResizer();
-    console.log('ctx', ctx);
-
     return render(<SidebarPanel ctx={ctx} siteUrl={siteUrl} />);
   },
   overrideFieldExtensions(field: Field, ctx) {
-    // console.log('field', field);
     if (field.attributes.api_key === 'name') {
-      console.log('OOOOO', field);
-
       return {
         editor: { id: 'name' },
       };
     }
+    if (field.attributes.api_key === 'picto') {
+      return {
+        editor: { id: 'picto' },
+      };
+    }
   },
   renderFieldExtension(fieldExtensionId: string, ctx: RenderFieldExtensionCtx) {
-    console.log('fieldExtensionId', fieldExtensionId, ctx);
     switch (fieldExtensionId) {
       case 'name':
-        if (ctx.fieldPath?.includes('icon.name')) {
-          const value = ctx.formValues[ctx.fieldPath] || '';
-
-          console.log('value', ctx.formValues, value, ctx.fieldPath);
-          const handleChange = (val: any) => {
-            console.log('val', val);
-            ctx.setFieldValue(ctx.fieldPath, val);
-          };
-
-          const getOptionLabel = (
-            option: string
-          ): { label: React.ReactNode; value: string } => {
-            let icon: React.ReactNode = '';
-            if (illustrationsLibrary.includes(option as any)) {
-              icon = (
-                <Illustration
-                  name={option as any}
-                  style={{ width: 16, height: 16 }}
-                />
-              );
-            } else if (pictosLibrary.includes(option as any)) {
-              icon = (
-                <Picto name={option as any} style={{ width: 16, height: 16 }} />
-              );
-            }
-
-            return {
-              value: option,
-              label: (
-                <span
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}
-                >
-                  {icon}
-                  <span>{option}</span>
-                </span>
-              ),
-            };
-          };
-
-          const options =
-            ((ctx.field.attributes.validators.enum as any)
-              ?.values as string[]) ?? [];
-          const selectOptions = options.map((opt: string) => {
-            return getOptionLabel(opt);
-          });
-
+        if (
+          ctx.fieldPath?.includes('icon.name') &&
+          ctx.field.attributes.field_type === 'string'
+        ) {
           return render(
-            <Canvas ctx={ctx}>
-              <SelectField
-                id='custom-select'
-                name='option'
-                label='Option'
-                value={
-                  selectOptions.find((opt: any) => opt.value === value) || null
-                }
-                hint='Select one of the options'
-                onChange={handleChange}
-                selectInputProps={{
-                  options: selectOptions,
-                }}
-              />
-            </Canvas>
+            <IconSelectField
+              ctx={ctx}
+              fieldPath={ctx.fieldPath}
+              getOptionLabel={getOptionLabel}
+            />
           );
         }
+        break;
+      case 'icon':
+        if (
+          ctx.fieldPath?.endsWith('icon') &&
+          ctx.field.attributes.field_type === 'string'
+        ) {
+          return render(
+            <IconSelectField
+              ctx={ctx}
+              fieldPath={ctx.fieldPath}
+              getOptionLabel={getOptionLabel}
+            />
+          );
+        }
+        break;
+      case 'picto':
+        if (
+          ctx.fieldPath?.endsWith('picto') &&
+          ctx.field.attributes.field_type === 'string'
+        ) {
+          return render(
+            <IconSelectField
+              ctx={ctx}
+              fieldPath={ctx.fieldPath}
+              getOptionLabel={getOptionLabel}
+            />
+          );
+        }
+        break;
+      default:
+        return undefined;
     }
   },
 });
