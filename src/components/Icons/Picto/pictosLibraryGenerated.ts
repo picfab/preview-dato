@@ -48,6 +48,7 @@ export const pictosLibrary = [
   'company',
   'contact_support',
   'contact_support_stroke',
+  'content_copy_outline',
   'contract_edit',
   'co_present',
   'creators',
@@ -72,6 +73,7 @@ export const pictosLibrary = [
   'euro',
   'event_available_stroke',
   'exports',
+  'facebook',
   'factory',
   'favorite',
   'filter_list',
@@ -100,6 +102,7 @@ export const pictosLibrary = [
   'language',
   'legal',
   'less',
+  'linkedin',
   'list',
   'local_library',
   'lock',
@@ -186,7 +189,8 @@ export const pictosLibrary = [
   'warning',
   'whatsapp',
   'work',
-  'work_fill'
+  'work_fill',
+  'x_twitter',
 ] as const;
 
 export type PictoName = (typeof pictosLibrary)[number];
