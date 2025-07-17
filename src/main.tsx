@@ -90,7 +90,7 @@ connect({
     ctx.startAutoResizer();
     return render(<SidebarPanel ctx={ctx} siteUrl={siteUrl} />);
   },
-  overrideFieldExtensions(field: Field, ctx) {
+  overrideFieldExtensions(field: Field, _ctx) {
     if (field.attributes.api_key === 'name') {
       return {
         editor: { id: 'name' },
