@@ -90,6 +90,7 @@ connect({
     ctx.startAutoResizer();
     return render(<SidebarPanel ctx={ctx} siteUrl={siteUrl} />);
   },
+
   overrideFieldExtensions(field: Field, _ctx) {
     if (field.attributes.api_key === 'name') {
       return {
@@ -99,6 +100,11 @@ connect({
     if (field.attributes.api_key === 'picto') {
       return {
         editor: { id: 'picto' },
+      };
+    }
+    if (field.attributes.api_key === 'icon') {
+      return {
+        editor: { id: 'icon' },
       };
     }
   },
@@ -122,7 +128,7 @@ connect({
         if (
           ctx.fieldPath?.endsWith('icon') &&
           ctx.field.attributes.field_type === 'string'
-        ) {
+        ) {          
           return render(
             <IconSelectField
               ctx={ctx}
