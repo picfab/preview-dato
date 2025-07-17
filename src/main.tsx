@@ -6,16 +6,14 @@ import {
   type RenderFieldExtensionCtx,
   type Field,
 } from 'datocms-plugin-sdk';
-import { SelectField, Canvas } from 'datocms-react-ui';
 import 'datocms-react-ui/styles.css';
 import ConfigScreen from './app/entrypoints/ConfigScreen';
 import { render } from './app/utils/render';
 import SidebarPanel from './components/SidebarPanel';
 import IconsModal from './components/IconsModal';
 import Icon from './components/Icon';
-import { getValueByPath } from './app/utils/getValueByPath';
 import IconSelectField from './components/IconSelectField';
-// import IconComboBox from './components/IconComboBox';
+import './styles.css';
 
 const siteUrl =
   import.meta.env.MODE !== 'development'
