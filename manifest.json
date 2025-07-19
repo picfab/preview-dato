@@ -1,0 +1,15 @@
+{
+  "name": "preview-dato",
+  "id": "preview-dato",
+  "parameters": {
+    "global": [
+      {
+        "id": "token",
+        "type": "string",
+        "label": "Token",
+        "required": true,
+        "secret": true
+      }
+    ]
+  }
+} 

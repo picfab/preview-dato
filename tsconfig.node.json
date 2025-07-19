@@ -14,9 +14,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    "outDir": "out-tsc",
-    "tsBuildInfoFile": "tsconfig.node.tsbuildinfo"
+    "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"]
 }

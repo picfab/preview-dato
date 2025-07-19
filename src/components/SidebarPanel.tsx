@@ -3,6 +3,7 @@ import {
   findProductionUri,
   type SiteLocale,
 } from '../app/utils/findProductionUrl';
+import { SignJWT } from 'jose';
 
 interface SidebarPanelProps {
   ctx: RenderItemFormSidebarPanelCtx;
@@ -49,9 +50,34 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
     });
   };
 
+  const getUserName = (user: any) => {
+    if (!user?.id) return null;
+    return user.id;
+  };
+
+  const handleTestToken = async () => {
+    const token = ctx.plugin.attributes.parameters.token;
+    const userName = getUserName(ctx.currentUser);
+    if (!userName) return;
+    if (typeof token !== 'string' || !token) {
+      console.error('Token secret invalide ou manquant.');
+      return;
+    }
+    try {
+      const secret = new TextEncoder().encode(token);
+      const jwtToken = await new SignJWT({ name: userName })
+        .setProtectedHeader({ alg: 'HS256' })
+        .setExpirationTime('1h')
+        .sign(secret);
+      console.log('JWT généré:', jwtToken);
+    } catch (e) {
+      console.error('Erreur lors de la génération du JWT:', e);
+    }
+  };
+
   return (
     <div>
-      <div className="container">
+      <div className='container'>
         <div
           style={{
             display: 'flex',
@@ -66,8 +92,8 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
         >
           <a
             href={`${siteUrl}/${prodUri}`}
-            target="_blank"
-            rel="noreferrer"
+            target='_blank'
+            rel='noreferrer'
             style={{
               ...buttonBaseStyle,
               backgroundColor: 'white',
@@ -87,8 +113,8 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
           </a>
           <a
             href={`${siteUrl}/preview/?slug=${slug}&id=${ctx?.item?.id}&locale=${ctx.locale}&type=${ctx.itemType?.attributes?.api_key}`}
-            target="_blank"
-            rel="noreferrer"
+            target='_blank'
+            rel='noreferrer'
             style={{
               ...buttonBaseStyle,
               backgroundColor: '#0F6FDE',
@@ -118,6 +144,18 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
             📚 View Icons
           </button>
         </div>
+        <button
+          onClick={handleTestToken}
+          style={{
+            ...buttonBaseStyle,
+            backgroundColor: '#F59E42',
+            color: 'white',
+            marginTop: '16px',
+            width: '100%',
+          }}
+        >
+          🧪 Test Token
+        </button>
       </div>
     </div>
   );

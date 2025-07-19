@@ -22,13 +22,15 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run typecheck && vite build",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "datocms-plugin-sdk": "^2.0.13",
     "datocms-react-ui": "^2.0.14",
+    "jose": "6.0.12",
     "react": "19.0.0",
     "react-aria-components": "^1.9.0",
     "react-dom": "19.0.0",
