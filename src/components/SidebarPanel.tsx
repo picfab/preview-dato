@@ -90,7 +90,7 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
             flexWrap: 'wrap',
           }}
         >
-          <a
+          {/* <a
             href={`${siteUrl}/${prodUri}`}
             target='_blank'
             rel='noreferrer'
@@ -131,7 +131,7 @@ export default function SidebarPanel({ ctx, siteUrl }: SidebarPanelProps) {
             }}
           >
             Preview
-          </a>
+          </a> */}
 
           <button
             onClick={handleModalOpen}

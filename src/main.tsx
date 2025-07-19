@@ -53,7 +53,7 @@ connect({
     return [
       {
         id: 'goToWebsite',
-        label: 'Go to website',
+        label: 'dev (payfit plugin)',
         startOpen: true,
       },
     ];
@@ -128,7 +128,7 @@ connect({
         if (
           ctx.fieldPath?.endsWith('icon') &&
           ctx.field.attributes.field_type === 'string'
-        ) {          
+        ) {
           return render(
             <IconSelectField
               ctx={ctx}
