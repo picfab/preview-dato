@@ -32,6 +32,7 @@ export default function IconSelectField({
   const options =
     ((ctx.field.attributes.validators.enum as any)?.values as string[]) ?? [];
   const selectOptions = options.map(getOptionLabel);
+
   const selectedOption =
     selectOptions.find((opt) => opt.value === value) || null;
 

@@ -2,7 +2,6 @@
   "name": "datocms-plugin-preview",
   "description": "Dato Preview Plugin",
   "homepage": "https://github.com/<USER>/<REPO>",
-  "private": false,
   "version": "0.1.0",
   "author": "<YOUR-NAME> <<YOUR-EMAIL>>",
   "type": "module",
@@ -38,7 +37,7 @@
   },
   "devDependencies": {
     "@types/node": "22.5.4",
-    "@types/react": "^18.3.3",
+    "@types/react": "18.3.23",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "globals": "^15.9.0",

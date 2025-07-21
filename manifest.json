@@ -1,6 +1,6 @@
 {
-  "name": "preview-dato",
-  "id": "preview-dato",
+  "name": "datocms-plugin",
+  "id": "datocms-plugin",
   "parameters": {
     "global": [
       {

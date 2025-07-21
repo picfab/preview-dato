@@ -92,66 +92,28 @@ connect({
   },
 
   overrideFieldExtensions(field: Field, _ctx) {
-    if (field.attributes.api_key === 'name') {
+    if (field.attributes.api_key === 'name' && field.id === '1763288') {
       return {
-        editor: { id: 'name' },
+        editor: { id: 'overwriteIcon' },
       };
     }
-    if (field.attributes.api_key === 'picto') {
+    if (field.attributes.api_key === 'icon' && field.id === '9554822') {
+      console.log('overwriteIcon Icon', field);
       return {
-        editor: { id: 'picto' },
-      };
-    }
-    if (field.attributes.api_key === 'icon') {
-      return {
-        editor: { id: 'icon' },
+        editor: { id: 'overwriteIcon' },
       };
     }
   },
   renderFieldExtension(fieldExtensionId: string, ctx: RenderFieldExtensionCtx) {
     switch (fieldExtensionId) {
-      case 'name':
-        if (
-          ctx.fieldPath?.includes('icon.name') &&
-          ctx.field.attributes.field_type === 'string'
-        ) {
-          return render(
-            <IconSelectField
-              ctx={ctx}
-              fieldPath={ctx.fieldPath}
-              getOptionLabel={getOptionLabel}
-            />
-          );
-        }
-        break;
-      case 'icon':
-        if (
-          ctx.fieldPath?.endsWith('icon') &&
-          ctx.field.attributes.field_type === 'string'
-        ) {
-          return render(
-            <IconSelectField
-              ctx={ctx}
-              fieldPath={ctx.fieldPath}
-              getOptionLabel={getOptionLabel}
-            />
-          );
-        }
-        break;
-      case 'picto':
-        if (
-          ctx.fieldPath?.endsWith('picto') &&
-          ctx.field.attributes.field_type === 'string'
-        ) {
-          return render(
-            <IconSelectField
-              ctx={ctx}
-              fieldPath={ctx.fieldPath}
-              getOptionLabel={getOptionLabel}
-            />
-          );
-        }
-        break;
+      case 'overwriteIcon':
+        return render(
+          <IconSelectField
+            ctx={ctx}
+            fieldPath={ctx.fieldPath}
+            getOptionLabel={getOptionLabel}
+          />
+        );
       default:
         return undefined;
     }
